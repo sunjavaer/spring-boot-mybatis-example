@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvliang.learn.springboot.mybatis.mapper.IndexMapper">
+  <resultMap id="BaseResultMap" type="com.lvliang.learn.springboot.mybatis.model.TestMybatis">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status_code" jdbcType="INTEGER" property="statusCode" />
+    <result column="status_name" jdbcType="VARCHAR" property="statusName" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.lvliang.learn.springboot.mybatis.model.TestMybatis">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Test_Mybatis (id, name, status_code, 
+      status_name, updatetime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{statusCode,jdbcType=INTEGER}, 
+      #{statusName,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, status_code, status_name, updatetime
+    from Test_Mybatis
+  </select>
+  
+  <select id="getOneContent" resultMap="BaseResultMap">
+  	select * from Test_Mybatis where id = 2
+  </select>
+  
+  <insert id="insertAll">
+  	insert into Test_Mybatis(name) values
+  	<foreach collection="list" item="model" separator=",">
+  		(#{model.name})
+  	</foreach>
+  </insert>
+  
+  <select id="getAllContent" resultType="com.lvliang.learn.springboot.mybatis.model.TestMybatis">
+  	select *
+    from Test_Mybatis
+  </select>
+  
+  <delete id="deleteAllContent">
+  	delete from Test_Mybatis
+  </delete>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+	<property name="LOG_DIR" value="f:/var/log/learn-spring-mybatis" />
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%p] %-5level %logger{36}.[%method] - %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="rollingFileINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_DIR}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>		
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%thread]-[%p] %-5level %logger{36}.[%method] - %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>debug</level>
+		</filter> 
+	</appender>
+	
+	<appender name="rollingFileERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_DIR}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_DIR}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>		
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%thread]-[%p] %-5level %logger{36}.[%method] - %msg %n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter> 
+	</appender>
+
+	<logger name="java.sql.Connection" level="debug" />
+	<logger name="org.apache.ibatis" level="debug" />
+	<logger name="org.mybatis.spring" level="debug" />
+	<logger name="com.lvliang.learn.springboot.mybatis" level="debug" />
+
+	<root level="debug">
+		<appender-ref ref="console" />
+		<appender-ref ref="rollingFileINFO" />
+		<appender-ref ref="rollingFileERROR" />
+	</root>
+</configuration>
