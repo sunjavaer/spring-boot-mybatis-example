@@ -5,12 +5,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
+import com.lvliang.learn.springboot.mybatis.model.CallBack;
 import com.lvliang.learn.springboot.mybatis.model.TestMybatis;
 import com.lvliang.learn.springboot.mybatis.service.IndexService;
 
@@ -27,6 +31,7 @@ public class IndexControl {
 		log.debug("access /");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
+		mv.addObject("value", "hello, world");
 		return mv;
 	}
 	
@@ -70,6 +75,17 @@ public class IndexControl {
 		service.deleteAllContent();
 		
 		return "success";
+	}
+	
+	@PostMapping(path="/submitForm", 
+			     consumes=MediaType.APPLICATION_JSON_UTF8_VALUE,
+			     produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public CallBack submitForm(@RequestBody TestMybatis testMybatis) {
+		log.debug("param: " + testMybatis.toString());
+		
+		CallBack callBack = new CallBack();
+		callBack.setIsOK("1");
+		return callBack;
 	}
 
 }

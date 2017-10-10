@@ -1,6 +1,5 @@
 <!DOCTYPE html>  
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"> 
+<html xmlns:th="http://www.thymeleaf.org"> 
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
@@ -8,11 +7,38 @@
 	<script type="text/javascript"> 
 	//等待dom元素加载完毕. 
 	$(document).ready(function(){ 
-	alert("Hello World!"); 
+	//alert("Hello World!");
+	
+	$("#aSubmit").click(function()  
+    {  	
+    	$.ajax({  
+        	type:"POST",  
+            url:"/submitForm",
+            contentType:"application/json; charset=utf-8",
+            dateType:"json",
+            data:JSON.stringify(GetJsonData()),
+            
+            success:function(returnedData){  
+            	alert(returnedData.isOK);
+            	alert(returnedData.message);
+            }  
+         });  
+    })
+    
+	function GetJsonData() {
+		var json = {
+		    "name": "lvliang"
+		};
+		return json;
+	}
+	
 	}); 
 	</script> 
 </head>
 <body>
 	hi, learn-spring-mybatis
+	#{value}
+	<p th:text="${value}" >3333</p>
+	<input id="aSubmit" type="button" value="submit" />
 </body>
 </html>
