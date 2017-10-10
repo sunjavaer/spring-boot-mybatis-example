@@ -44,6 +44,7 @@ public class IndexControl {
 	@GetMapping("/getAllContent")
 	public List<TestMybatis> getAllContent(@RequestParam(defaultValue="1") Integer pageNum,
 			                               @RequestParam(defaultValue="10") Integer pageSize) {
+		log.debug("access /getAllContent pageNum: " + pageNum + " pageSize: " + pageSize);
 		List<TestMybatis> testMybatisList = service.getAllContent(pageNum, pageSize);
 
 		Page page = (Page)testMybatisList;
