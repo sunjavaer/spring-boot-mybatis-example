@@ -39,6 +39,7 @@
 	<logger name="org.apache.ibatis" level="debug" />
 	<logger name="org.mybatis.spring" level="debug" />
 	<logger name="com.lvliang.learn.springboot.mybatis" level="debug" />
+	<logger name="org.thymeleaf.TemplateEngine" level="debug" />
 
 	<root level="debug">
 		<appender-ref ref="console" />
