@@ -43,4 +43,17 @@
   <delete id="deleteAllContent">
   	delete from Test_Mybatis
   </delete>
+  
+  <select id="queryTestMybatis" resultType="com.lvliang.learn.springboot.mybatis.model.TestMybatis">
+  	select *
+  	from Test_Mybatis
+  	<where>
+  		<if test="name != null and name != ''">
+  			name = ${name}
+  		</if>
+  		<if test="statusCode != null and statusCode != ''">
+  			status_code = ${statusCode}
+  		</if>
+  	</where>
+  </select>
 </mapper>

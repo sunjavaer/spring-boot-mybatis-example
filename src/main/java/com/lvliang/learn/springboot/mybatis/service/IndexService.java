@@ -50,4 +50,8 @@ public class IndexService {
 	public void deleteAllContent() {
 		mapper.deleteAllContent();
 	}
+	
+	public List<TestMybatis> queryTestMybatis(String name, String statusCode) {
+		return mapper.queryTestMybatis(name, statusCode);
+	}
 }

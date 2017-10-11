@@ -87,5 +87,13 @@ public class IndexControl {
 		callBack.setIsOK("1");
 		return callBack;
 	}
-
+	
+	@GetMapping("/queryTestMybatis")
+	public List<TestMybatis> queryTestMybatis(@RequestParam(defaultValue="") String name,
+			                                  @RequestParam(defaultValue="") String statusCode) {
+		log.debug("name: " + name);
+		log.debug("statusCode: " + statusCode);
+		
+		return service.queryTestMybatis(name, statusCode);
+	}
 }
