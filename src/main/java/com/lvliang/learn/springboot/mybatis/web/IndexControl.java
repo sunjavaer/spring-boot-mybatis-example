@@ -1,5 +1,6 @@
 package com.lvliang.learn.springboot.mybatis.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,6 +33,19 @@ public class IndexControl {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("index");
 		mv.addObject("value", "hello, world");
+		
+		
+//		RestTemplate template = new RestTemplate();
+//		List<TestMybatis> testMybatisList = template.getForObject("http://localhost:8080/getAllContent", List.class, String.class);
+//		log.debug(testMybatisList.get(0).toString());
+		
+		TestMybatis bean = new TestMybatis();
+		bean.setName("bean value from control");
+		mv.addObject("bean_value", bean);
+		mv.addObject("date", new Date());
+		
+		mv.addObject("title_name", "thymeleaf");
+		
 		return mv;
 	}
 	

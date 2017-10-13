@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title th:text="${title_name}">Insert title here</title>
+	<script type="text/javascript" src="test.js" th:src="@{~/js/jquery-2.1.4.min.js}"></script>
+	<script type="text/javascript">
+
+	//等待dom元素加载完毕. 
+	$(document).ready(function(){ 
+	alert("Hello World! thymeleaf");
+	
+	$("#aSubmit").click(function()  
+    {  	
+    	$.ajax({  
+        	type:"POST",  
+            url:"/submitForm",
+            contentType:"application/json; charset=utf-8",
+            dateType:"json",
+            data:JSON.stringify(GetJsonData()),
+            
+            success:function(returnedData){  
+            	alert(returnedData.isOK);
+            	alert(returnedData.message);
+            }  
+         });  
+    })
+    
+	function GetJsonData() {
+		var json = {
+		    "name": "lvliang"
+		};
+		return json;
+	}
+	
+	}); 
+	</script> 
+</head>
+</html>

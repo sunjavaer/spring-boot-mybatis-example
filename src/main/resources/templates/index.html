@@ -1,44 +1,20 @@
 <!DOCTYPE html>  
-<html xmlns:th="http://www.thymeleaf.org"> 
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<script type="text/javascript" src="./js/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript"> 
-	//等待dom元素加载完毕. 
-	$(document).ready(function(){ 
-	//alert("Hello World!");
-	
-	$("#aSubmit").click(function()  
-    {  	
-    	$.ajax({  
-        	type:"POST",  
-            url:"/submitForm",
-            contentType:"application/json; charset=utf-8",
-            dateType:"json",
-            data:JSON.stringify(GetJsonData()),
-            
-            success:function(returnedData){  
-            	alert(returnedData.isOK);
-            	alert(returnedData.message);
-            }  
-         });  
-    })
-    
-	function GetJsonData() {
-		var json = {
-		    "name": "lvliang"
-		};
-		return json;
-	}
-	
-	}); 
-	</script> 
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head th:replace="header :: head">
 </head>
+
 <body>
 	hi, learn-spring-mybatis
 	#{value}
 	<p th:text="${value}" >3333</p>
+	<p th:text="${bean_value.name}">bean_value</p>
+	<p th:text="${#servletContext.contextPath}">session id</p>
+	<p>Today is: <span th:text="${#dates.format(date, 'yyyy-MM-dd HH:mm:ss')}">13 May 2011</span></p>
 	<input id="aSubmit" type="button" value="submit" />
+	<form action="/test" th:attr="action=@{/update}"></form>
+	<form action="/test" th:action="@{/delete}"></form>
+	
+	<div th:insert="footer :: copy"></div>
 </body>
 </html>
